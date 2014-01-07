@@ -32,6 +32,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'bootstrap-sass'
+group :development do
+    gem 'rails_layout'
+end
+
 group :test do
     gem 'rspec-expectations'
     gem 'cucumber-rails', :require => false
@@ -40,6 +45,8 @@ group :test do
     gem 'capybara'
     gem 'database_cleaner'
 end
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
