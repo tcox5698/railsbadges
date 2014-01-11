@@ -41,6 +41,7 @@ group :development do
 end
 
 group :test do
+    gem 'capybara-email'
     gem 'rspec-expectations'
     gem 'cucumber-rails', :require => false
     gem 'selenium-webdriver'
