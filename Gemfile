@@ -6,6 +6,7 @@ ruby '2.1.0'
 gem 'rails', '4.0.2'
 
 gem 'pg'
+gem 'devise'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -36,6 +37,7 @@ end
 gem 'bootstrap-sass'
 group :development do
     gem 'rails_layout'
+    gem 'letter_opener'
 end
 
 group :test do
