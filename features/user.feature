@@ -7,6 +7,6 @@ Feature: As a user
     When I try to login
     Then I have the option to create a new account
     When I create an account with username 'tom@here.com' and password 'Password7!'
-    Then I receive an email confirmation
-    When I follow the link in the email confirmation
+    Then I receive an email confirmation at 'tom@here.com'
+    When I follow the link in the email confirmation sent to 'tom@here.com'
     Then I can login with username 'tom@here.com' and password 'Password7!'
