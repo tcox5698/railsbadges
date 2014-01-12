@@ -5,7 +5,7 @@ def visit_login
     visit '/users/sign_in'
 end
 
-When(/^I try to login$/) do
+When(/^I visit the login page$/) do
     visit_login
 end
 
