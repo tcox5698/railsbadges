@@ -74,6 +74,10 @@ When(/^I logout$/) do
     click_link 'Logout'
 end
 
-Then(/^I see the login page$/) do
-    page.should have_content 'Sign in'
+Then(/^the '(.*)' link is not visible$/) do |link_text|
+    page.should_not have_content link_text
+end
+
+Then(/^the '(.*)' link is visible$/) do |link_text|
+    page.should have_content link_text
 end
