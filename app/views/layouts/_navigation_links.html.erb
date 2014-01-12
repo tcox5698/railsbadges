@@ -1,6 +1,9 @@
 <%# add navigation links to this file %>
 
 <ul class="nav navbar-nav">
+  <% if current_user.nil? %>
   <li class="active"><%= link_to 'Login', new_user_session_path %></li>
+  <% else %>
   <li class="active"><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+  <% end %>
 </ul>

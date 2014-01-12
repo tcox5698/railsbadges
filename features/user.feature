@@ -13,8 +13,8 @@ Feature: As a user
 
   Scenario: I can logout so that no one has access to my account
     Given I am logged in
-    When I try to login
-    Then the application tells me I am already logged in
+    Then the 'Login' link is not visible
+    And the 'Logout' link is visible
     When I logout
-    Then I try to login
-    Then I see the login page
+    Then the 'Login' link is visible
+    And the 'Logout' link is not visible
