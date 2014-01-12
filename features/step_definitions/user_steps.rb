@@ -47,3 +47,19 @@ Then(/^I can login with username '(.*)' and password '(.*)'$/) do |username, pas
 
     page.should have_content 'Signed in successfully'
 end
+
+Given(/^I am logged in$/) do
+    user = User.new
+end
+
+Then(/^the application tells me I am already logged in$/) do
+    pending # express the regexp above with the code you wish you had
+end
+
+When(/^I logout$/) do
+    pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I see the login page$/) do
+    pending # express the regexp above with the code you wish you had
+end
