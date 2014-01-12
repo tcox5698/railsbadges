@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Listing users</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password reset sent</th>
+      <th>Sign in count</th>
+      <th>Last sign in</th>
+      <th>Confirmed at</th>
+      <th>Created at</th>
+
+
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.reset_password_sent_at %></td>
+        <td><%= user.sign_in_count %></td>
+        <td><%= user.last_sign_in_at %></td>
+        <td><%= user.confirmed_at %></td>
+        <td><%= user.created_at %></td>
+
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
+</div>
