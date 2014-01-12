@@ -24,9 +24,9 @@ Feature: As a system administrator
       | nancy@jones.com | user, administrator | passw2   |
     When I can login with email 'nancy@jones.com' and password 'passw2'
     Then I can view a list of users containing the following users
-      | email           | roles               | password |
-      | bob@smith.com   | user                | passw    |
-      | nancy@jones.com | user, administrator | passw2   |
+      | email           | roles               |
+      | bob@smith.com   | user                |
+      | nancy@jones.com | user, administrator |
 
   Scenario: As an administrator I can disable a user.
 
