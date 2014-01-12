@@ -52,6 +52,7 @@ end
 
 Then(/^I can login with email '(.*)' and password '(.*)'$/) do |email, password|
     login(email, password)
+    page.should have_content email.partition('@').first
 end
 
 Given(/^I am logged in$/) do
