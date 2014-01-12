@@ -10,3 +10,11 @@ Feature: As a user
     Then I receive an email confirmation at 'tom@here.com'
     When I follow the link in the email confirmation sent to 'tom@here.com'
     Then I can login with username 'tom@here.com' and password 'Password7!'
+
+  Scenario: I can logout so that no one has access to my account
+    Given I am logged in
+    When I try to login
+    Then the application tells me I am already logged in
+    When I logout
+    Then I try to login
+    Then I see the login page
