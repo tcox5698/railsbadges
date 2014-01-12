@@ -1,4 +1,5 @@
 RailsBadges::Application.routes.draw do
+  get "dashboard/index"
   devise_for :users
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
