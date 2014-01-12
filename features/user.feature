@@ -18,3 +18,13 @@ Feature: As a user
     When I logout
     Then the 'Login' link is visible
     And the 'Logout' link is not visible
+
+  Scenario: I can not see dashboard if I am not logged in
+    Given I am not logged in
+    When I visit the dashboard
+    Then I am prompted to login
+
+  Scenario: I can see the dashboard if I am logged in
+    Given I am logged in
+    When I visit the dashboard
+    Then I see the dashboard

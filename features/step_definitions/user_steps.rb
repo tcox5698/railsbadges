@@ -82,3 +82,16 @@ end
 Then(/^the '(.*)' link is visible$/) do |link_text|
     page.should have_content link_text
 end
+
+Given(/^I am not logged in$/) do
+    visit '/'
+    if page.has_content? 'Logout'
+        click_link 'Logout'
+    end
+    page.should have_content 'Login'
+
+end
+
+Then(/^I am prompted to login$/) do
+    page.should have_content 'Sign in'
+end

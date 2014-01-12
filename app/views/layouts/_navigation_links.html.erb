@@ -1,10 +1,15 @@
 <%# add navigation links to this file %>
 
 <ul class="nav navbar-nav">
-  <% if current_user.nil? %>
-  <li class="active"><%= link_to 'Login', new_user_session_path %></li>
+  <% if current_user %>
+      <li class="active"><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
   <% else %>
-  <li class="active"><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-  <li class="active"><a><%= current_user.email.partition('@').first %></a></a></li>
+      <li class="active"><%= link_to 'Login', new_user_session_path %></li>
   <% end %>
+
+  <li class="active"><%= link_to 'Dashboard', dashboard_index_path %></li>
+
+  <% if current_user %>
+      <li class="active"><a><%= current_user.email.partition('@').first %></a></li>
+<% end %>
 </ul>
