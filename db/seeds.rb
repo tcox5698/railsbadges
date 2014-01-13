@@ -8,3 +8,5 @@
 
 Role.new(name: 'user').save!
 Role.new(name: 'administrator').save!
+Role.new(name: 'superuser').save!
+
