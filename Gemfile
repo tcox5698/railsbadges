@@ -53,6 +53,10 @@ group :test do
     gem 'database_cleaner'
 end
 
+group :development, :test do
+    gem 'rspec-rails'
+end
+
 
 
 # Use ActiveModel has_secure_password
