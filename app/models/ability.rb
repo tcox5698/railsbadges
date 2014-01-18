@@ -5,12 +5,14 @@ class Ability
 
       roles = user.roles.collect { |role| role.name }
 
+      can :read, User, {'id' => user.id}
+      can :update, User, {'id' => user.id}
+
+
       if roles.include?('superuser') or roles.include? ('administrator')
           can :manage, :all
       end
 
-      can :read, User, :id => user.id
-      can :update, User, :id => user.id
 
       cannot :destroy, User
       # Define abilities for the passed in user here. For example:
