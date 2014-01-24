@@ -4,7 +4,7 @@ Feature: As a user
 
   Scenario: I can create an account and login
     Given email 'buckaroo@here.com' does not exist
-    When I try to login
+    When I visit the login page
     Then I have the option to create a new account
     When I create an account with email 'buckaroo@here.com' and password 'Password7!'
     Then I receive an email confirmation at 'buckaroo@here.com'
@@ -25,6 +25,6 @@ Feature: As a user
     Then I am prompted to login
 
   Scenario: I can see the dashboard if I am logged in
-    Given I am logged in
+    When I login as a normal user
     When I visit the dashboard
     Then I see the dashboard

@@ -3,11 +3,10 @@ Feature: As a system administrator
   So that I can help them or prevent them from doing harm
 
   Scenario: When no one has logged in as super user then no one else can log in.
-    Given no one has logged in as super user
-    When I visit the login page
-    Then I see the message 'Merit Badges has not been initialized.  Please initialize the system as super user.'
-    When I try to login with email 'bob@smith.com' and password 'passw'
-    Then I see the message 'Merit Badges has not been initialized.  Please initialize the system as super user.'
+    Given no one has logged in as superuser
+    When I login as a normal user
+    Then the application tells me 'MeritBadges is not initialized. Please log in as superuser and configure another user as superuser.'
+    And I should not be logged in
 
   Scenario: When someone logs in as super user they are prompted to specify a different user as admin
   and the super user is disabled.

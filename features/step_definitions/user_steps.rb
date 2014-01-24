@@ -55,7 +55,7 @@ Then(/^I can login with email '(.*)' and password '(.*)'$/) do |email, password|
     page.should have_content email.partition('@').first
 end
 
-Given(/^I am logged in$/) do
+When(/^I login as a normal user$/) do
     email = 'fake@fake.com'
     password = 'password'
     user = User.new(email: email, password: password,
@@ -67,8 +67,8 @@ Given(/^I am logged in$/) do
     login email, password
 end
 
-Then(/^the application tells me I am already logged in$/) do
-    page.should have_content 'You are already signed in.'
+Then(/^the application tells me '(.*)'$/) do | expected_message|
+    page.should have_content expected_message
 end
 
 When(/^I logout$/) do
@@ -94,4 +94,13 @@ end
 
 Then(/^I am prompted to login$/) do
     page.should have_content 'Sign in'
+end
+
+Given(/^no one has logged in as superuser$/) do
+  Role.find_by_name('superuser').users.count.should eq 1
+end
+
+And(/^I should not be logged in$/) do
+  visit '/'
+  page.should have_link 'Login'
 end
