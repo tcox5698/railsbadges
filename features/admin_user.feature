@@ -10,10 +10,14 @@ Feature: As a system administrator
 
   Scenario: When someone logs in as super user they are prompted to specify a different user as admin
   and the super user is disabled.
-    Given no one has logged in as super user
-    When I log in as super user
+    Given no one has logged in as superuser
+    And the following users exist
+      | email           | roles               | password |
+      | bob@smith.com   | user                | passw    |
+    When I log in as superuser
     Then I am prompted to create a user with administrator role
-    When I create a user with administrator role
+    And I visit the user administration page
+
     Then I see the message 'The super user has now been disabled.  Please log in as a regular user.'
 
   Scenario: As an administrator I can view a list of users.
@@ -21,6 +25,7 @@ Feature: As a system administrator
       | email           | roles               | password |
       | bob@smith.com   | user                | passw    |
       | nancy@jones.com | user, administrator | passw2   |
+    When I visit the login page
     When I can login with email 'nancy@jones.com' and password 'passw2'
     Then I can view a list of users containing the following users
       | email           | roles               |

@@ -104,3 +104,27 @@ And(/^I should not be logged in$/) do
   visit '/'
   page.should have_link 'Login'
 end
+
+When(/^I log in as superuser$/) do
+  visit_login
+  login 'superuser', 'password'
+end
+
+Then(/^I am prompted to create a user with administrator role$/) do
+  page.should have_content 'MeritBadges is not initialized. Please configure another use as superuser.'
+end
+
+Given(/^the following users exist$/) do |table|
+  # table is a table.hashes.keys # => [:email, :roles, :password]
+  table.hashes.each do |row_hash|
+    user = User.create email: row_hash[:email],
+                       password: row_hash[:password],
+                       password_confirmation: row_hash[:password],
+                       confirmed_at: Time.now
+
+    roles = row_hash[:roles].split ','
+    roles.each do |role|
+      user.roles << Role.find_by_name(role.strip)
+    end
+  end
+end
