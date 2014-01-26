@@ -12,7 +12,7 @@ describe UsersController do
 
     before do
       Ability.should_receive(:new).and_return stub_ability
-      stub_ability.stub(:authorize!).and_return true
+      stub_ability.stub(:authorize!).and_return authorized
       sign_in current_user
       User.should_receive(:find).with(input_user_id).and_return edit_user
       Role.should_receive(:all).and_return expected_roles
@@ -21,6 +21,8 @@ describe UsersController do
     end
 
     context 'when user has ability to manage users' do
+      let(:authorized) { true }
+
       describe 'the edited user' do
         subject { assigns :user }
 

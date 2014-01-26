@@ -13,6 +13,10 @@ describe User do
         it { should respond_to(:email) }
         it { should validate_uniqueness_of :email }
         it { should validate_presence_of :email }
+
+        describe 'user roles' do
+          it
+        end
     end
 
     describe 'abilities' do

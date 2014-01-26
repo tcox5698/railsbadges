@@ -5,6 +5,17 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable; :lockable
 
   has_and_belongs_to_many :roles
+
+  def update_with_roles(user_params, role_ids)
+    self.update(user_params)
+
+    self.roles.delete_all
+
+    role_ids.each do | role |
+     new_role = Role.find(role)
+     self.roles << new_role
+    end
+  end
 end
 
 # == Schema Information

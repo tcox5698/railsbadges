@@ -1,18 +1,12 @@
-<p id="notice"><%= notice %></p>
-
+<h1>User</h1>
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<p>
-  <strong>Password confirmation:</strong>
-  <%= @user.password_confirmation %>
+  <strong>Roles:</strong>
+  <%= @user.roles.collect{|role|role.name}.join ', ' %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
