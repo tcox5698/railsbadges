@@ -110,7 +110,7 @@ When(/^I log in as superuser$/) do
   login 'superuser', 'password'
 end
 
-Then(/^I am prompted to create a user with administrator role$/) do
+Then(/^I am prompted to configure a user with administrator role$/) do
   page.should have_content 'MeritBadges is not initialized. Please configure another use as superuser.'
 end
 

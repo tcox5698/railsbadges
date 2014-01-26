@@ -15,10 +15,19 @@ Feature: As a system administrator
       | email         | roles | password |
       | bob@smith.com | user  | passw    |
     When I log in as superuser
-    Then I am prompted to create a user with administrator role
+    Then I am prompted to configure a user with administrator role
     And I visit the user administration page
-
     Then I see the message 'The super user has now been disabled.  Please log in as a regular user.'
+
+  Scenario: As an administrator I can change a user's roles.
+    Given the following users exist
+      | email         | roles | password |
+      | bob@smith.com | user  | passw    |
+    When I give 'bob@smith.com' the role of 'administrator'
+    Then I can view a list of users containing the following users
+      | email                     | roles               |
+      | superuser@meritbadges.com | superuser           |
+      | bob@smith.com             | user, administrator |
 
   Scenario: As an administrator I can view a list of users.
     Given the following users exist

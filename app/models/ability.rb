@@ -3,20 +3,20 @@ class Ability
 
   def initialize(user)
 
-      roles = user.roles.collect { |role| role.name }
+    roles = user.roles.collect { |role| role.name }
 
-      can :read, User, {'id' => user.id}
-      can :update, User, {'id' => user.id}
+    can :read, User, {'id' => user.id}
+    can :update, User, {'id' => user.id}
 
+    if roles.include?('superuser') or roles.include? ('administrator')
+      can :manage, :all
+    end
 
-      if roles.include?('superuser') or roles.include? ('administrator')
-          can :manage, :all
-      end
+    cannot :destroy, User
 
-
-      cannot :destroy, User
-      # Define abilities for the passed in user here. For example:
-      #
+    can :read, Role
+    # Define abilities for the passed in user here. For example:
+    #
     #   user ||= User.new # guest user (not logged in)
     #   if user.admin?
     #     can :manage, :all
