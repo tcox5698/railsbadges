@@ -6,7 +6,22 @@ Then(/^I can view a list of users containing the following users$/) do |table|
 
   title.text.should eq 'Users'
 
-  table.hashes.each do | user |
-    pending
+  user_map = Hash[table.hashes.map { |user| [user[:email], user] }]
+
+  html_rows = page.all 'table tr'
+
+  html_rows.length.should eq table.hashes.length + 1
+
+  html_rows.each_with_index do |row, index|
+    if index > 0
+      email_cell = row.find 'td:nth-of-type(1)'
+      roles_cell = row.find 'td:nth-of-type(2)'
+
+      expected_user = user_map[email_cell.text.strip]
+
+      expected_user[:roles].split(',').each do |expected_role|
+        roles_cell.should have_content expected_role.strip
+      end
+    end
   end
 end

@@ -12,8 +12,8 @@ Feature: As a system administrator
   and the super user is disabled.
     Given no one has logged in as superuser
     And the following users exist
-      | email           | roles               | password |
-      | bob@smith.com   | user                | passw    |
+      | email         | roles | password |
+      | bob@smith.com | user  | passw    |
     When I log in as superuser
     Then I am prompted to create a user with administrator role
     And I visit the user administration page
@@ -28,9 +28,10 @@ Feature: As a system administrator
     When I visit the login page
     When I can login with email 'nancy@jones.com' and password 'passw2'
     Then I can view a list of users containing the following users
-      | email           | roles               |
-      | bob@smith.com   | user                |
-      | nancy@jones.com | user, administrator |
+      | email                     | roles               |
+      | superuser@meritbadges.com | superuser           |
+      | bob@smith.com             | user                |
+      | nancy@jones.com           | user, administrator |
 
   Scenario: As an administrator I can disable a user.
 

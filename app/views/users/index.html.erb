@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Email</th>
+      <th>Roles</th>
       <th>Password reset sent</th>
       <th>Sign in count</th>
       <th>Last sign in</th>
@@ -22,6 +23,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
+        <td><%= user.roles.map {|role|role.name}.join(', ') %></td>
         <td><%= user.reset_password_sent_at %></td>
         <td><%= user.sign_in_count %></td>
         <td><%= user.last_sign_in_at %></td>
