@@ -3,7 +3,9 @@ class Ability
 
   def initialize(user)
 
-    roles = user.roles.collect { |role| role.name }
+    roles = user.roles
+
+    roles = roles.collect { |role| role.name }
 
     can :read, User, {'id' => user.id}
     can :update, User, {'id' => user.id}

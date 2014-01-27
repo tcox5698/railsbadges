@@ -10,9 +10,13 @@ FactoryGirl.define do
     end
 
     after(:create) do |user, evaluator|
+      user = user.reload
+
       evaluator.user_roles.each do |role|
-        user.roles << Role.find_by_name(role)
+        the_role = Role.find_by_name(role)
+        the_role.users<<user
       end
+
     end
 
     factory :superuser do

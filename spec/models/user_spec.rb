@@ -15,7 +15,15 @@ describe User do
         it { should validate_presence_of :email }
 
         describe 'user roles' do
-          it
+          it 'should save and return roles' do
+            admin_role = Role.find_by_name('administrator')
+
+            @user.roles << admin_role
+
+            @user = @user.reload
+
+            @user.roles.should include admin_role
+          end
         end
     end
 

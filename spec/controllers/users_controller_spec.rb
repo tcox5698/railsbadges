@@ -1,27 +1,30 @@
 require 'spec_helper'
 
 describe UsersController do
-
-
-  describe '#edit' do
-    let(:input_user_id) { '73' }
-    let(:current_user) { stub_model User, email: 'current@user.stub' }
-    let(:stub_ability) { double "Ability" }
-    let(:edit_user) { stub_model User }
-    let(:expected_roles) { [Role.new(name: 'fakeRole1')] }
+  describe 'GET #edit' do
+    let!(:normal_user) {create :user, email: 'normal@user.com'}
+    let!(:administrator) {create :administrator}
+    let!(:edit_user) { create :user, email: 'edit@user.com' }
+    let(:input_user_id) { edit_user.id }
 
     before do
-      Ability.should_receive(:new).and_return stub_ability
-      stub_ability.stub(:authorize!).and_return authorized
       sign_in current_user
-      User.should_receive(:find).with(input_user_id).and_return edit_user
-      Role.should_receive(:all).and_return expected_roles
 
       get :edit, id: input_user_id
     end
 
+    context 'when user does not have ability to edit users' do
+      let(:current_user) { normal_user }
+
+      describe 'the response' do
+        subject { response }
+
+        it { should be_redirect }
+      end
+    end
+
     context 'when user has ability to manage users' do
-      let(:authorized) { true }
+      let(:current_user) { administrator }
 
       describe 'the edited user' do
         subject { assigns :user }
@@ -32,7 +35,7 @@ describe UsersController do
       describe 'the available roles' do
         subject { assigns :available_roles }
 
-        it { should eq expected_roles}
+        it { should eq Role.all }
       end
 
     end
