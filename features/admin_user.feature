@@ -32,18 +32,22 @@ Feature: As a system administrator
       | email           | roles         | password |
       | bob@smith.com   | user          | passw    |
       | admin@smith.com | administrator | passw    |
+      | super@smith.com | superuser     | passw    |
     When I login as 'admin@smith.com' with password 'passw'
     And I give user 'bob@smith.com' the role of 'administrator'
     Then I can view a list of users containing the following users
-      | email                     | roles               |
-      | superuser@meritbadges.com | superuser           |
-      | bob@smith.com             | user, administrator |
+      | email                     | roles         |
+      | superuser@meritbadges.com | superuser     |
+      | bob@smith.com             | administrator |
+      | admin@smith.com           | administrator |
+      | super@smith.com           | superuser     |
 
   Scenario: As an administrator I can view a list of users.
     Given the following users exist
       | email           | roles               | password |
       | bob@smith.com   | user                | passw    |
       | nancy@jones.com | user, administrator | passw2   |
+      | super@smith.com | superuser           | passw    |
     When I visit the login page
     When I can login with email 'nancy@jones.com' and password 'passw2'
     Then I can view a list of users containing the following users
@@ -51,6 +55,7 @@ Feature: As a system administrator
       | superuser@meritbadges.com | superuser           |
       | bob@smith.com             | user                |
       | nancy@jones.com           | user, administrator |
+      | super@smith.com           | superuser           |
 
   Scenario: As an administrator I can disable a user.
     Given pending
