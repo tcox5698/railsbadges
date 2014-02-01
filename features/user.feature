@@ -2,6 +2,9 @@ Feature: As a user
   I need an account
   So that I can provide information specific to myself
 
+  Background:
+    Given application is initialized
+
   Scenario: I can create an account and login
     Given email 'buckaroo@here.com' does not exist
     When I visit the login page
@@ -12,7 +15,7 @@ Feature: As a user
     Then I can login with email 'buckaroo@here.com' and password 'Password7!'
 
   Scenario: I can logout so that no one has access to my account
-    Given I am logged in
+    Given I login as a normal user
     Then the 'Login' link is not visible
     And the 'Logout' link is visible
     When I logout

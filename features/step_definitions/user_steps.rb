@@ -134,3 +134,11 @@ When(/^I login as '(.*)' with password '(.*)'$/) do |email, password|
   login email, password
   page.should have_content 'Signed in successfully.'
 end
+
+Given(/^application is initialized$/) do
+  user = User.create email: 'init@fake.com',
+                     password: 'password',
+                     password_confirmation: 'password',
+                     confirmed_at: Time.now
+  user.roles << Role.find_by_name('superuser')
+end
