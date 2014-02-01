@@ -3,6 +3,10 @@ class Ability
 
   def initialize(user)
 
+    if user.nil?
+      return
+    end
+
     roles = user.roles
 
     roles = roles.collect { |role| role.name }

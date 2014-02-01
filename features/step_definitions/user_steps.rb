@@ -47,7 +47,6 @@ def login(username, password)
     fill_in 'Password', :with => password
 
     page.click_button 'Sign in'
-    page.should have_content 'Signed in successfully'
 end
 
 Then(/^I can login with email '(.*)' and password '(.*)'$/) do |email, password|
@@ -107,11 +106,11 @@ end
 
 When(/^I log in as superuser$/) do
   visit_login
-  login 'superuser', 'password'
+  login 'superuser@meritbadges.com', 'password'
 end
 
 Then(/^I am prompted to configure a user with administrator role$/) do
-  page.should have_content 'MeritBadges is not initialized. Please configure another use as superuser.'
+  page.should have_content 'MeritBadges is not initialized. Please configure another user as superuser.'
 end
 
 Given(/^the following users exist$/) do |table|

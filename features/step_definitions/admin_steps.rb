@@ -25,3 +25,10 @@ Then(/^I can view a list of users containing the following users$/) do |table|
     end
   end
 end
+
+When(/^I give user '(.*)' the role of '(.*)'$/) do |email, role|
+  click_link 'Users'
+  page.find :xpath, "//h1='Users'"
+  tr = page.find :xpath, "//tr[td='#{email}']"
+  tr.find(:xpath, "td/a='Edit'").click
+end
