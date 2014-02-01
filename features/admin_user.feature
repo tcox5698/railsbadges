@@ -58,7 +58,22 @@ Feature: As a system administrator
       | super@smith.com           | superuser           |
 
   Scenario: As an administrator I can disable a user.
-    Given pending
+    Given the following users exist
+      | email           | roles               | password |
+      | bob@smith.com   | user                | passw    |
+      | nancy@jones.com | user, administrator | passw2   |
+      | super@smith.com | superuser           | passw    |
+    And I visit the login page
+    Then I can login with email 'bob@smith.com' and password 'passw'
+    When I logout
+    And I login as 'nancy@jones.com' with password 'passw2'
+    Then I disable user 'bob@smith.com'
+    When I logout
+    And I login as 'bob@smith.com' with password 'passw'
+    Then the application tells me 'user disabled'
+    And I visit '/dashboard'
+    Then I am prompted to login
+
 
   Scenario: As an administrator I can unlock a user.
     Given pending

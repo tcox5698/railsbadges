@@ -39,3 +39,7 @@ end
 When(/^I visit '(.*)'$/) do |path|
   visit path
 end
+
+Then(/^I disable user 'bob@smith.com'$/) do
+  pending
+end
