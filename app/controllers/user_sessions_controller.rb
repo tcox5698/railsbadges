@@ -10,7 +10,7 @@ class UserSessionsController < Devise::SessionsController
         flash[:alert] = 'MeritBadges is not initialized.  Please configure another user as superuser.'
       else
         sign_out
-        flash[:alert] = 'Default superuser is disabled.  Please login as a real person.'
+        flash[:alert] = 'Default superuser is now disabled.  Please login as a real person.'
       end
     elsif Role.find_by_name('superuser').users.count < 2
       sign_out

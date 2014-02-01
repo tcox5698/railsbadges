@@ -1,6 +1,28 @@
 require 'spec_helper'
 
 describe UsersController do
+  describe 'POST #update' do
+    describe 'as the superuser' do
+      let(:current_user) { User.find_by_email 'superuser@meritbadges.com' }
+      let!(:edit_user) { create :user, email: 'editme@here.com' }
+
+      describe 'when I update a user successfully' do
+        before do
+          sign_in current_user
+          put :update, id: edit_user.id, user: {email: edit_user.email}, selected_roles: [Role.find_by_name('user').id]
+        end
+
+        its(:current_user) { should be_nil }
+        it { should redirect_to root_path }
+
+        describe 'flash alert' do
+          subject { flash[:alert] }
+          it { should eq 'Logged out superuser since you updated a user. Login as a real person now.' }
+        end
+      end
+    end
+  end
+
   describe 'GET #edit' do
     let!(:normal_user) {create :user, email: 'normal@user.com'}
     let!(:administrator) {create :administrator}

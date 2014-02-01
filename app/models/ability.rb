@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
 
     if user.nil?
-      return
+      raise 'User can not be nil'
     end
 
     roles = user.roles

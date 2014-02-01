@@ -28,7 +28,14 @@ end
 
 When(/^I give user '(.*)' the role of '(.*)'$/) do |email, role|
   click_link 'Users'
-  page.find :xpath, "//h1='Users'"
-  tr = page.find :xpath, "//tr[td='#{email}']"
-  tr.find(:xpath, "td/a='Edit'").click
+  page.find :xpath, '//h1[text()="Users"]'
+  tr = page.find :xpath, "//tr[td[text()='#{email}']]"
+  tr.find(:xpath, "td/a[text()='Edit']").click
+  page.should have_content 'Editing user'
+  page.select role, :from => 'selected_roles[]'
+  click_button 'Update User'
+end
+
+When(/^I visit '(.*)'$/) do |path|
+  visit path
 end

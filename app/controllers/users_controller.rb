@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   #before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
   check_authorization
   load_and_authorize_resource
 
@@ -46,8 +47,13 @@ class UsersController < ApplicationController
     role_ids = params[:selected_roles]
     respond_to do |format|
       if @user.update_with_roles(user_params, role_ids)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+        if current_user.email == 'superuser@meritbadges.com'
+          sign_out current_user
+          format.html { redirect_to root_path, alert: 'Logged out superuser since you updated a user. Login as a real person now.' }
+        else
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { head :no_content }
+        end
       else
         format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }

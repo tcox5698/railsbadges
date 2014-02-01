@@ -16,22 +16,24 @@ Feature: As a system administrator
     When I log in as superuser
     Then I am prompted to configure a user with administrator role
 
-  @javascript
   Scenario: When the default superuser configures someone else as a super user, the default
-    superuser is disabled and logged out
+  superuser is disabled and logged out
     Given the following users exist
       | email         | roles | password |
       | bob@smith.com | user  | passw    |
     And I log in as superuser
     When I give user 'bob@smith.com' the role of 'administrator'
+    Then the application tells me 'Logged out superuser since you updated a user. Login as a real person now.'
+    When I visit the dashboard
     Then I am prompted to login
-    Then the application tells me 'The super user has now been disabled.  Please log in as a regular user.'
 
   Scenario: As an administrator I can change a user's roles.
     Given the following users exist
-      | email         | roles | password |
-      | bob@smith.com | user  | passw    |
-    When I give user 'bob@smith.com' the role of 'administrator'
+      | email           | roles         | password |
+      | bob@smith.com   | user          | passw    |
+      | admin@smith.com | administrator | passw    |
+    When I login as 'admin@smith.com' with password 'passw'
+    And I give user 'bob@smith.com' the role of 'administrator'
     Then I can view a list of users containing the following users
       | email                     | roles               |
       | superuser@meritbadges.com | superuser           |
