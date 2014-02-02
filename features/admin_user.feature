@@ -70,8 +70,8 @@ Feature: As a system administrator
     Then I disable user 'bob@smith.com'
     When I logout
     And I login as 'bob@smith.com' with password 'passw'
-    Then the application tells me 'user disabled'
-    And I visit '/dashboard'
+    Then the application tells me 'Your account has been disabled. Please email tcox56_98@yahoo.com and hope for the best.'
+    And I visit the dashboard
     Then I am prompted to login
 
 

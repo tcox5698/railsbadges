@@ -132,7 +132,6 @@ end
 When(/^I login as '(.*)' with password '(.*)'$/) do |email, password|
   visit_login
   login email, password
-  page.should have_content 'Signed in successfully.'
 end
 
 Given(/^application is initialized$/) do

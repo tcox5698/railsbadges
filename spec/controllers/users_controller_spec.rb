@@ -9,7 +9,7 @@ describe UsersController do
       describe 'when I update a user successfully' do
         before do
           sign_in current_user
-          put :update, id: edit_user.id, user: {email: edit_user.email, disabled: true}, selected_roles: [Role.find_by_name('administrator').id]
+          put :update, id: edit_user.id, user: {email: edit_user.email, disabled: '1'}, selected_roles: [Role.find_by_name('administrator').id]
         end
 
         its(:current_user) { should be_nil }

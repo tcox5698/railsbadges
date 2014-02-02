@@ -7,14 +7,17 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
 
   def update_with_roles(user_params, role_ids)
-    self.update(user_params)
+    update(user_params)
+    if save
+      self.roles.delete_all
 
-    self.roles.delete_all
-
-    role_ids.each do |role|
-      new_role = Role.find(role)
-      self.roles << new_role
+      role_ids.each do |role|
+        new_role = Role.find(role)
+        self.roles << new_role
+      end
+      return true
     end
+    return false
   end
 
   #this method is called by devise to check for "active" state of the model
@@ -48,6 +51,7 @@ end
 #  unconfirmed_email      :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  disabled               :boolean
 #
 # Indexes
 #

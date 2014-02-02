@@ -45,5 +45,7 @@ end
 
 Then(/^I disable user '(.*)'$/) do |email|
   edit_user email
+  check 'Disabled'
+  click_button 'Update User'
 
 end
