@@ -115,12 +115,13 @@ Then(/^I am prompted to configure a user with administrator role$/) do
 end
 
 Given(/^the following users exist$/) do |table|
-  # table is a table.hashes.keys # => [:email, :roles, :password]
+  # table is a table.hashes.keys # => [:email, :roles, :password, :disabled]
   table.hashes.each do |row_hash|
     user = User.create email: row_hash[:email],
                        password: row_hash[:password],
                        password_confirmation: row_hash[:password],
-                       confirmed_at: Time.now
+                       confirmed_at: Time.now,
+                       disabled: "true" == row_hash[:disabled]
 
     roles = row_hash[:roles].split ','
     roles.each do |role|

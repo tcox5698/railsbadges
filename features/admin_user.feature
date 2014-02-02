@@ -74,9 +74,25 @@ Feature: As a system administrator
     And I visit the dashboard
     Then I am prompted to login
 
+  Scenario: As an administrator I can enable a user.
+    Given the following users exist
+      | email           | roles               | password | disabled |
+      | bob@smith.com   | user                | passw    | true     |
+      | nancy@jones.com | user, administrator | passw2   |          |
+      | super@smith.com | superuser           | passw    |          |
+    And I login as 'nancy@jones.com' with password 'passw2'
+    Then I enable user 'bob@smith.com'
+    When I logout
+    And I visit the login page
+    Then I can login with email 'bob@smith.com' and password 'passw'
 
-  Scenario: As an administrator I can unlock a user.
-    Given pending
-
-  Scenario: As a user I can not edit my roles.
-    Given pending
+  Scenario: As a user I can not edit my own roles.
+    Given the following users exist
+      | email           | roles     | password |
+      | bob@smith.com   | user      | passw    |
+      | super@smith.com | superuser | passw    |
+    And I login as 'bob@smith.com' with password 'passw'
+    And I give user 'bob@smith.com' the role of 'administrator'
+    Then I can view a list of users containing the following users
+      | email                     | roles     |
+      | bob@smith.com             | user      |

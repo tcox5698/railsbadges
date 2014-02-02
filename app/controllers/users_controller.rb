@@ -46,14 +46,22 @@ class UsersController < ApplicationController
     @available_roles = Role.all
     role_ids = params[:selected_roles]
     respond_to do |format|
-      if @user.update_with_roles(user_params, role_ids)
-        if current_user.email == 'superuser@meritbadges.com'
-          sign_out current_user
-          format.html { redirect_to root_path, alert: 'Logged out superuser since you updated a user. Login as a real person now.' }
+      if @user.update(user_params)
+        if can? :update, Role
+          if @user.update_roles(role_ids)
+            if current_user.email == 'superuser@meritbadges.com'
+              sign_out current_user
+              format.html { redirect_to root_path, alert: 'Logged out superuser since you updated a user. Login as a real person now.' }
+            else
+              format.html { redirect_to @user, notice: 'User was successfully updated.' }
+              format.json { head :no_content }
+            end
+          end
         else
-          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.html { redirect_to @user, notice: 'User was successfully updated - except the roles.' }
           format.json { head :no_content }
         end
+
       else
         format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }

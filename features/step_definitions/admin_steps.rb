@@ -2,9 +2,7 @@ Then(/^I can view a list of users containing the following users$/) do |table|
   # table is a table.hashes.keys # => [:email, :roles]
   click_link 'Users'
 
-  title = page.find 'main div.container h1'
-
-  title.text.should eq 'Users'
+  page.should have_xpath '//main/div/h1[text()="Users"]'
 
   user_map = Hash[table.hashes.map { |user| [user[:email], user] }]
 
@@ -19,8 +17,13 @@ Then(/^I can view a list of users containing the following users$/) do |table|
 
       expected_user = user_map[email_cell.text.strip]
 
-      expected_user[:roles].split(',').each do |expected_role|
-        roles_cell.should have_content expected_role.strip
+      all_role_names = Role.all.collect { |role| role.name }
+      expected_role_names = expected_user[:roles].split(',').collect{|s|s.strip}
+      actual_role_names = roles_cell.text.split(',').collect{|s|s.strip}
+
+      all_role_names.each do |role_name|
+        actual_role_names.should include role_name.strip if expected_role_names.include? role_name
+        actual_role_names.should_not include role_name.strip if !expected_role_names.include? role_name
       end
     end
   end
@@ -43,9 +46,15 @@ def edit_user(email)
   page.should have_content 'Editing user'
 end
 
-Then(/^I disable user '(.*)'$/) do |email|
+Then(/^I (enable|disable) user '(.*)'$/) do |enable_flag, email|
   edit_user email
-  check 'Disabled'
+  if enable_flag == 'enable'
+    page.find('input[name="user[disabled]"][type="checkbox"]').checked?.should be_true
+    uncheck 'Disabled'
+  else
+    page.find('input[name="user[disabled]"][type="checkbox"]').checked?.should be_false
+    check 'Disabled'
+  end
   click_button 'Update User'
-
+  page.should have_content 'User was successfully updated.'
 end
