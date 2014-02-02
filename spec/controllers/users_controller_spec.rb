@@ -4,12 +4,12 @@ describe UsersController do
   describe 'POST #update' do
     describe 'as the superuser' do
       let(:current_user) { User.find_by_email 'superuser@meritbadges.com' }
-      let!(:edit_user) { create :user, email: 'editme@here.com' }
+      let!(:edit_user) { create :user, email: 'editme@here.com', user_roles: ['user'] }
 
       describe 'when I update a user successfully' do
         before do
           sign_in current_user
-          put :update, id: edit_user.id, user: {email: edit_user.email}, selected_roles: [Role.find_by_name('user').id]
+          put :update, id: edit_user.id, user: {email: edit_user.email, disabled: true}, selected_roles: [Role.find_by_name('administrator').id]
         end
 
         its(:current_user) { should be_nil }
@@ -18,6 +18,14 @@ describe UsersController do
         describe 'flash alert' do
           subject { flash[:alert] }
           it { should eq 'Logged out superuser since you updated a user. Login as a real person now.' }
+        end
+
+        describe 'the updated user' do
+          subject { assigns :user }
+
+          its(:disabled) { should be_true }
+          its(:roles) { should include Role.find_by_name('administrator') }
+
         end
       end
     end

@@ -2,7 +2,26 @@ require 'spec_helper'
 
 describe User do
 
-    describe 'model' do
+  describe '#active_for_authentication?' do
+
+    describe 'when user is not disabled' do
+      subject { create :user }
+
+      it 'returns true' do
+        subject.active_for_authentication?.should be_true
+      end
+    end
+
+    describe 'when user is disabled' do
+      subject { create :user, disabled: true }
+
+      it 'returns false' do
+        subject.active_for_authentication?.should be_false
+      end
+    end
+  end
+
+  describe 'model' do
         before do
             @user = User.new(email: 'fake@faker.com', password: 'password8', password_confirmation: 'password8')
             @user.save!

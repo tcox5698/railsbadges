@@ -27,11 +27,7 @@ Then(/^I can view a list of users containing the following users$/) do |table|
 end
 
 When(/^I give user '(.*)' the role of '(.*)'$/) do |email, role|
-  click_link 'Users'
-  page.find :xpath, '//h1[text()="Users"]'
-  tr = page.find :xpath, "//tr[td[text()='#{email}']]"
-  tr.find(:xpath, "td/a[text()='Edit']").click
-  page.should have_content 'Editing user'
+  edit_user email
   page.select role, :from => 'selected_roles[]'
   click_button 'Update User'
 end
@@ -40,6 +36,14 @@ When(/^I visit '(.*)'$/) do |path|
   visit path
 end
 
-Then(/^I disable user 'bob@smith.com'$/) do
-  pending
+def edit_user(email)
+  click_link 'Users'
+  tr = page.find :xpath, "//tr[td[text()='#{email}']]"
+  tr.find(:xpath, "td/a[text()='Edit']").click
+  page.should have_content 'Editing user'
+end
+
+Then(/^I disable user '(.*)'$/) do |email|
+  edit_user email
+
 end

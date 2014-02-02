@@ -6,6 +6,20 @@ describe UserSessionsController do
       @request.env["devise.mapping"] = Devise.mappings[:user]
     end
 
+    describe 'when logging in with disabled user' do
+      before do
+        create :user, email: 'disabled@user.com', disabled: true
+        post :create, user: {email: 'disabled@user.com', password: 'factory!'}
+      end
+
+      it { should redirect_to(new_user_session_path) }
+
+      describe 'flash alert' do
+        subject { flash[:alert] }
+        it { should eq 'Your account has been disabled.  Please email tcox56_98@yahoo.com and hope for the best.' }
+      end
+    end
+
     describe 'when logging in as superuser' do
       describe 'when alternative superuser has been already been configured' do
         before do
@@ -18,7 +32,7 @@ describe UserSessionsController do
 
         describe 'flash alert' do
           subject { flash[:alert] }
-          it { should eq 'Default superuser is disabled.  Please login as a real person.' }
+          it { should eq 'Default superuser is now disabled.  Please login as a real person.' }
         end
       end
 
