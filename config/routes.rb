@@ -1,7 +1,9 @@
 RailsBadges::Application.routes.draw do
   get 'dashboard/index'
+  get 'dashboard/log_action'
   devise_for :users, :controllers => { :sessions => "user_sessions" }
   get 'home/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
