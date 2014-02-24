@@ -11,6 +11,7 @@ RailsBadges::Application.routes.draw do
   root 'home#index'
 
   resources :users
+  resources :user_actions
 
 
 

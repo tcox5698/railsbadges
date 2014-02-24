@@ -2,6 +2,30 @@ require 'spec_helper'
 
 describe User do
 
+  describe 'abilities' do
+    subject { Ability.new current_user }
+
+    context 'with others user action' do
+      let(:other_user) { create :user, email: 'other_user@user.com' }
+      let(:user_action) { create :user_action, user: other_user }
+      context 'when regular user' do
+        let(:current_user) { create :user }
+        it { should_not be_able_to(:show, user_action) }
+      end
+
+      context 'when admin user' do
+        let(:current_user) { create :administrator }
+        it { should be_able_to(:show, user_action) }
+      end
+    end
+
+    context 'with own action' do
+      let(:current_user) { create :user }
+      let(:user_action) { create :user_action, user: current_user }
+      it { should be_able_to(:show, user_action) }
+    end
+  end
+
   describe '#active_for_authentication?' do
 
     describe 'when user is not disabled' do

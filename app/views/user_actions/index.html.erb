@@ -1,0 +1,31 @@
+<h1>Listing user_actions</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user_actions.each do |user_action| %>
+      <tr>
+        <td><%= user_action.name %></td>
+        <td><%= user_action.action_date and user_action.action_date.to_s :short %></td>
+        <td><%= user_action.user and user_action.user.email %></td>
+        <td><%= link_to 'Show', user_action %></td>
+        <td><%= link_to 'Edit', edit_user_action_path(user_action) %></td>
+        <td><%= link_to 'Destroy', user_action, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User action', new_user_action_path %>

@@ -12,7 +12,10 @@ class Ability
     roles = roles.collect { |role| role.name }
 
     can :read, User, {'id' => user.id}
+    can :show, User, {'id' => user.id}
     can :update, User, {'id' => user.id}
+
+    can :read, UserAction, {'user_id' => user.id}
 
     if roles.include?('superuser') or roles.include? ('administrator')
       can :manage, :all

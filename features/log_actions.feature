@@ -9,4 +9,3 @@ Feature: As a user I want to log actions
 
 
   Scenario: As a user I can log one action after another.
-

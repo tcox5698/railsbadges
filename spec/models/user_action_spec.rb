@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe UserAction do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { UserAction.new }
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :action_date }
+  it { should validate_presence_of :user_id }
 end
