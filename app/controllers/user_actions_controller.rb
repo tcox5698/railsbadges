@@ -3,11 +3,12 @@ class UserActionsController < ApplicationController
 
   before_filter :authenticate_user!
   check_authorization
-  load_and_authorize_resource
+  authorize_resource
 
   # GET /user_actions
   # GET /user_actions.json
   def index
+    @user_actions = UserAction.accessible_by current_ability
   end
 
   # GET /user_actions/1
@@ -62,6 +63,7 @@ class UserActionsController < ApplicationController
   # DELETE /user_actions/1
   # DELETE /user_actions/1.json
   def destroy
+    @user_action = UserAction.find params[:id]
     @user_action.destroy
     respond_to do |format|
       format.html { redirect_to user_actions_url }

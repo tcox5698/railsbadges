@@ -1,10 +1,10 @@
 <h1>Log an Action</h1>
-<form id="log_action_form">
+<%= form_tag({controller: 'dashboard', action: 'save_action'}) do %>
   <div class="field">
-    <label for="action_name">Action</label>:
-    <input type="text" name="action_name" id="action_name"/>
+    <%= label_tag(:name, "What did you do?") %>
+    <%= text_field_tag(:name) %>
   </div>
   <div class="actions">
-    <input type="submit" name="save_action" value="Save" id=""save_action>
+    <%= submit_tag("Save") %>
   </div>
-</form>
+<% end %>

@@ -82,15 +82,24 @@ describe UserActionsController do
   end
 
   describe "GET edit" do
+    let(:current_user) {admin_user}
+
     it "assigns the requested user_action as @user_action" do
+      sign_in current_user
       user_action = create :user_action
       get :edit, {:id => user_action.to_param}
       assigns(:user_action).should eq(user_action)
-      subject.response.should redirect_to 'bob'
+      subject.response.status.should be 200
     end
   end
 
   describe "POST create" do
+    let(:current_user) {admin_user}
+
+    before do
+      sign_in current_user
+    end
+
     describe "with valid params" do
       it "creates a new UserAction" do
         expect {
@@ -99,7 +108,7 @@ describe UserActionsController do
       end
 
       it "assigns a newly created user_action as @user_action" do
-        post :create, {:user_action => valid_attributes}
+        post :create, {:user_action => {name: 'my action', action_date: Time.new }}
         assigns(:user_action).should be_a(UserAction)
         assigns(:user_action).should be_persisted
       end
@@ -175,6 +184,10 @@ describe UserActionsController do
   end
 
   describe "DELETE destroy" do
+    before do
+      sign_in admin_user
+    end
+
     it "destroys the requested user_action" do
       user_action = create :user_action
       expect {
