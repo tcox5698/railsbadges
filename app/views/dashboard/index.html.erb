@@ -1,7 +1,7 @@
 <div class="container" id="dashboard_container">
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
-  <% UserAction.order(action_date: :desc).limit(10).each do |action| %>
+<h1>Dashboard</h1>
+<h2>Your recent actions</h2>
+  <% UserAction.accessible_by(current_ability).order(action_date: :desc).limit(10).each do |action| %>
     <p class="action_list_item"><%= action.name %> </p>
   <% end %>
 </div>

@@ -142,3 +142,7 @@ Given(/^application is initialized$/) do
                      confirmed_at: Time.now
   user.roles << Role.find_by_name('superuser')
 end
+
+Given(/^user '(.*)' with password '(.*)' exists$/) do |email, password|
+  create :user, email: email, password: password, password_confirmation: password
+end

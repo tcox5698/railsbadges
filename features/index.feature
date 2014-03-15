@@ -38,3 +38,34 @@ Feature: As a potential user
       | action4  |
       | action3  |
       | action2  |
+
+  Scenario: When there are actions from multiple users, I only see my own actions
+    Given user 'x@y.com' with password 'password' exists
+    And I login as 'x@y.com' with password 'password'
+    And I log the following actions
+      | name |
+      | x1   |
+      | x2   |
+      | x3   |
+    And I logout
+    Given user 'a@b.com' with password 'password' exists
+    And I login as 'a@b.com' with password 'password'
+    And I log the following actions
+      | name |
+      | a1   |
+      | a2   |
+      | a3   |
+    When I visit the dashboard
+    Then I should see these and only these actions in this order
+      | name |
+      | a3   |
+      | a2   |
+      | a1   |
+    When I logout
+    And I login as 'x@y.com' with password 'password'
+    When I visit the dashboard
+    Then I should see these and only these actions in this order
+      | name |
+      | x3   |
+      | x2   |
+      | x1   |

@@ -2,6 +2,7 @@ require 'capybara/email'
 
 World(Capybara::Email::DSL)
 
+
 Capybara.register_driver :selenium_chrome do |app|
   #noinspection RubyArgCount
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
@@ -24,3 +25,5 @@ Before do | scenario |
     superuser.roles << Role.find_by_name('superuser')
   end
 end
+
+World(FactoryGirl::Syntax::Methods)
