@@ -5,3 +5,12 @@ When(/^I log an action called '(.*)'$/) do |action_name|
   fill_in 'What did you do?', with: action_name
   click_button 'Save'
 end
+
+
+And(/^I log the following actions$/) do |table|
+  # table is a table.hashes.keys # => [:name]
+  table.hashes.each do |row|
+    step "I log an action called '#{row[:name]}'"
+  end
+
+end
