@@ -96,7 +96,3 @@ Feature: As a system administrator
     Then I can view a list of users containing the following users
       | email                     | roles     |
       | bob@smith.com             | user      |
-
-  Scenario: As a user I can not see the logged actions of others.
-
-  Scenario: As an administrator I can edit the logged actions of all users.

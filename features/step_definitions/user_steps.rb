@@ -57,10 +57,8 @@ end
 When(/^I login as a normal user$/) do
   email = 'fake@fake.com'
   password = 'password'
-  user = User.new(email: email, password: password,
+  User.new(email: email, password: password,
                   password_confirmation: password, confirmed_at: Time.now).save!
-
-  puts user
 
   visit_login
   login email, password

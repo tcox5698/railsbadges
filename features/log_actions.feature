@@ -10,5 +10,3 @@ Feature: As a user I want to log actions
     Then I visit the dashboard
     Then I see 'finished something' in my recent actions
 
-
-  Scenario: As a user I can log one action after another.
