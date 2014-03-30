@@ -4,11 +4,11 @@ class DashboardController < ApplicationController
   def index
   end
 
-  def log_action
+  def new_action
 
   end
 
-  def save_action
+  def save_new_action
     @user_action = UserAction.new(name: params[:name], user: current_user, action_date: Time.new)
     @user_action.save!
 
