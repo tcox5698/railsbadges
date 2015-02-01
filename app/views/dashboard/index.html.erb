@@ -1,6 +1,6 @@
 <div class="container" id="dashboard_container">
 <h1>Dashboard</h1>
-<h2>Your recent actions</h2>
+<h2>Your recent actions!</h2>
   <% UserAction.accessible_by(current_ability).order(action_date: :desc).limit(10).each do |action| %>
     <p class="action_list_item"><%= action.name %> </p>
   <% end %>
