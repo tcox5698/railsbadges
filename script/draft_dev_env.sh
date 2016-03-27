@@ -15,10 +15,7 @@ sudo chkconfig postgresql-9.4 on
 
 sudo service postgresql-9.4 start
 
-sudo su - postgres
-
-    createuser -s vagrant
-    exit
+sudo -u postgres "createuser -s vagrant"
 
 sudo ln -s /usr/pgsql-9.4/bin/p* /usr/local/bin
 
@@ -28,5 +25,5 @@ sudo rpm -Uvh epel-release-7-5.noarch.rpm
 sudo yum install qtwebkit-devel # will work with the dash in between qt and webkit, but not if you are using chef
 sudo ln -s /usr/lib64/qt4/bin/qmake /usr/bin/qmake # or some other method to get qmake in your path like `export QMAKE`
 
-bundle exec rake db:create
-bundle exec rake db:migrate
+#bundle exec rake db:create
+#bundle exec rake db:migrate
