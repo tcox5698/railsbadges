@@ -49,10 +49,10 @@ end
 Then(/^I (enable|disable) user '(.*)'$/) do |enable_flag, email|
   edit_user email
   if enable_flag == 'enable'
-    page.find('input[name="user[disabled]"][type="checkbox"]').checked?.should be_true
+    page.find('input[name="user[disabled]"][type="checkbox"]').checked?.should be_truthy
     uncheck 'Disabled'
   else
-    page.find('input[name="user[disabled]"][type="checkbox"]').checked?.should be_false
+    page.find('input[name="user[disabled]"][type="checkbox"]').checked?.should be_falsey
     check 'Disabled'
   end
   click_button 'Update User'
