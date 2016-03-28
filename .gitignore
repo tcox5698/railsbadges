@@ -20,3 +20,5 @@
 .DS_Store
 
 .vagrant/
+
+epel-release-7-5.noarch.rpm
