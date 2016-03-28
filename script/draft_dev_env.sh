@@ -2,17 +2,17 @@
 
 set -e
 
-#gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-#echo "FINISHED installing keys"
-#
-#sudo yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
-#echo "FINISHED installing pgdg-centos rpm"
-#
-#wget http://mirror.sfo12.us.leaseweb.net/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-#echo "FINISHED epel rpm fetch"
-#
-#sudo rpm -Uvh epel-release-7-5.noarch.rpm
-#echo "FINISHED epel rpm install"
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+echo "FINISHED installing keys"
+
+sudo yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+echo "FINISHED installing pgdg-centos rpm"
+
+wget http://mirror.sfo12.us.leaseweb.net/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+echo "FINISHED epel rpm fetch"
+
+sudo rpm -Uvh epel-release-7-5.noarch.rpm
+echo "FINISHED epel rpm install"
 
 sudo yum -y install postgresql94 postgresql94-server postgresql94-contrib postgresql94-libs postgresql94-devel qtwebkit-devel nano
 echo "FINISHED installing packages"
