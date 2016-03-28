@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe UserAction do
   subject { UserAction.new }
   it { should validate_presence_of :name }

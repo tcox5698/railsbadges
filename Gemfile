@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.9'
 
 gem 'pg'
 gem 'devise'
 gem 'cancan'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.5'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -39,27 +39,28 @@ end
 
 gem 'bootstrap-sass'
 group :development do
-    gem 'rails_layout'
-    gem 'letter_opener'
+  gem 'rails_layout'
+  gem 'letter_opener'
 end
 
 group :test do
-    gem 'capybara-email'
-    gem 'rspec-expectations'
-    gem 'cucumber-rails', :require => false
-    gem 'selenium-webdriver'
-    gem 'capybara-webkit'
-    gem 'capybara'
-    gem 'database_cleaner'
-    gem 'shoulda-matchers'
-
+  gem 'minitest'
+  gem 'capybara-email'
+  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers', "< 3.0.0", :require => false
+  gem 'rspec-activemodel-mocks'
 end
 
 group :development, :test do
-    gem 'rspec-rails'
-    gem 'factory_girl_rails'
+  gem 'rspec-expectations'
+  gem 'rspec-its'
+  gem 'rspec-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'factory_girl_rails'
 end
-
 
 
 # Use ActiveModel has_secure_password

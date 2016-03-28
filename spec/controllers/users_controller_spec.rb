@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'rspec/its'
 
 describe UsersController do
   describe 'POST #update' do
@@ -23,7 +24,7 @@ describe UsersController do
         describe 'the updated user' do
           subject { assigns :user }
 
-          its(:disabled) { should be_true }
+          its(:disabled) { should be_truthy }
           its(:roles) { should include Role.find_by_name('administrator') }
 
         end

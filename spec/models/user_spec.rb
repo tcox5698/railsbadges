@@ -32,7 +32,7 @@ describe User do
       subject { create :user }
 
       it 'returns true' do
-        subject.active_for_authentication?.should be_true
+        subject.active_for_authentication?.should be_truthy
       end
     end
 
@@ -40,7 +40,7 @@ describe User do
       subject { create :user, disabled: true }
 
       it 'returns false' do
-        subject.active_for_authentication?.should be_false
+        subject.active_for_authentication?.should be_falsey
       end
     end
   end
@@ -143,7 +143,6 @@ end
 #  unconfirmed_email      :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
-#  disabled               :boolean
 #
 # Indexes
 #
