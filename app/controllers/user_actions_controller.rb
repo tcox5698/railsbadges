@@ -16,8 +16,7 @@
 
 class UserActionsController < ApplicationController
   before_action :set_user_action, only: [:show, :edit, :update, :destroy]
-
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   check_authorization
   authorize_resource
 
