@@ -26,4 +26,4 @@ Before do | scenario |
   end
 end
 
-World(FactoryGirl::Syntax::Methods)
+World(FactoryBot::Syntax::Methods)

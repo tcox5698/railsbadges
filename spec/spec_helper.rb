@@ -25,7 +25,11 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
-  config.include FactoryGirl::Syntax::Methods
+  config.expect_with :rspec do |expectations|
+    expectations.syntax = [:should, :expect]
+  end
+  
+  config.include FactoryBot::Syntax::Methods
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -46,7 +50,7 @@ RSpec.configure do |config|
   config.order = "random"
 
 
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :controller
 
   load "#{Rails.root}/db/seeds.rb"
 
