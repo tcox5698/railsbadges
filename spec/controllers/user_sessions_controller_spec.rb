@@ -9,7 +9,7 @@ describe UserSessionsController do
     describe 'when logging in with disabled user' do
       before do
         create :user, email: 'disabled@user.com', disabled: true
-        post :create, user: {email: 'disabled@user.com', password: 'factory!'}
+        post :create, params: {user: {email: 'disabled@user.com', password: 'factory!'}}
       end
 
       it { should redirect_to(new_user_session_path) }
@@ -24,7 +24,7 @@ describe UserSessionsController do
       describe 'when alternative superuser has been already been configured' do
         before do
           create :superuser, email: 'superguy@here.com'
-          post :create, user: {email: 'superuser@meritbadges.com', password: 'password'}
+          post :create, params: {user: {email: 'superuser@meritbadges.com', password: 'password'}}
         end
 
         it { should redirect_to(root_path) }
@@ -38,7 +38,7 @@ describe UserSessionsController do
 
       describe 'when alternative superuser has NOT been already been configured' do
         before do
-          post :create, user: {email: 'superuser@meritbadges.com', password: 'password'}
+          post :create, params: {user: {email: 'superuser@meritbadges.com', password: 'password'}}
         end
 
         it { should redirect_to(root_path) }
@@ -58,7 +58,7 @@ describe UserSessionsController do
       describe 'when alternative superuser has been already been configured' do
         before do
           create :superuser, email: 'superguy@here.com'
-          post :create, user: {email: current_user.email, password: 'factory!'}
+          post :create, params: {user: {email: current_user.email, password: 'factory!'}}
         end
 
         it { should redirect_to(root_path) }
@@ -71,7 +71,7 @@ describe UserSessionsController do
 
       describe 'when alternative superuser has not been configured' do
         before do
-          post :create, user: {email: current_user.email, password: 'factory!'}
+          post :create, params: {user: {email: current_user.email, password: 'factory!'}}
         end
 
         it { should redirect_to(root_path) }

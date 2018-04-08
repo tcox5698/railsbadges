@@ -7,7 +7,7 @@ gem 'rails', '~>5.0.7'
 
 gem 'pg'
 gem 'devise'
-gem 'cancan'
+gem 'cancancan'
 #
 # # Use SCSS for stylesheets
 gem 'sass-rails'
