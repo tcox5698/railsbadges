@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>5.0.7'
+gem 'rails', '~>5.1.6'
 
 gem 'pg'
 gem 'devise'
@@ -48,7 +48,7 @@ group :test do
   gem 'capybara-email'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
-  gem 'capybara'
+  gem 'capybara'#, "< 3.0.0"
   gem 'database_cleaner'
   gem 'shoulda-matchers', "< 3.0.0", :require => false
   gem 'rspec-activemodel-mocks'
