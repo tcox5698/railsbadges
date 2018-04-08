@@ -1,4 +1,4 @@
-class UserAction < ActiveRecord::Base
+class UserAction < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true
