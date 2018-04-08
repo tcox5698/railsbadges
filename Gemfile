@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 ruby '2.1.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.9'
+gem 'rails', '4.2.10'
 
-gem 'pg'
+gem 'pg', '0.21.0'
 gem 'devise'
 gem 'cancan'
 
