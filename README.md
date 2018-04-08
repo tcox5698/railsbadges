@@ -14,7 +14,8 @@ Rails project for keeping up to date - tracks achievements!
 1. `rake db:migrate`
 1. `rake db:migrate RAILS_ENV=test`
 1. Run tests `rake spec`
-1. Start the app 
+1. Run the cucumber features `cucumber`
+1. Start the app `rails s` 
 
 ## Initialization
 

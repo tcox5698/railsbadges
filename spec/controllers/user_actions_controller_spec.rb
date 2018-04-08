@@ -38,15 +38,15 @@ describe UserActionsController do
 
         describe 'when administrator' do
           let(:current_user) { admin_user }
-          it 'should include all the actions' do
-            subject.should eq [user_action, admin_action]
+          it 'includes all the actions' do
+            expect(subject).to eq [user_action, admin_action]
           end
         end
 
         describe 'when user' do
           let(:current_user) { user }
-          it 'should include only the users actions' do
-            subject.should eq [user_action]
+          it 'includes only the users actions' do
+            expect(subject).to eq [user_action]
           end
         end
       end
@@ -67,7 +67,9 @@ describe UserActionsController do
 
         describe 'the assigned action' do
           subject { assigns :user_action }
-          it { should eq expected_action }
+          it 'is the other users action' do
+            expect(subject).to eq expected_action
+          end
         end
       end
 
@@ -76,12 +78,16 @@ describe UserActionsController do
 
         describe 'the flash message' do
           subject { flash[:alert] }
-          it { should eq 'You are not authorized to access this page.' }
+          it 'shows user is not authorized' do
+            expect(subject).to eq 'You are not authorized to access this page.'
+          end
         end
 
         describe 'the response' do
           subject { response }
-          it{ should redirect_to root_path }
+          it 'redirects home' do
+            expect(subject).to redirect_to root_path
+          end
         end
       end
     end
@@ -104,8 +110,9 @@ describe UserActionsController do
       sign_in current_user
       user_action = create :user_action
       get :edit, {:id => user_action.to_param}
-      assigns(:user_action).should eq(user_action)
-      subject.response.status.should be 200
+
+      expect(assigns(:user_action)).to eq user_action
+      expect(subject.response.status).to be 200
     end
   end
 
@@ -125,13 +132,14 @@ describe UserActionsController do
 
       it "assigns a newly created user_action as @user_action" do
         post :create, {:user_action => {name: 'my action', action_date: Time.new }}
-        assigns(:user_action).should be_a(UserAction)
-        assigns(:user_action).should be_persisted
+
+        expect(assigns(:user_action)).to be_a UserAction
+        expect(assigns(:user_action)).to be_persisted
       end
 
       it "redirects to the created user_action" do
         post :create, {:user_action => valid_attributes}
-        response.should redirect_to(UserAction.last)
+        expect(response).to redirect_to UserAction.last
       end
     end
 
@@ -144,12 +152,16 @@ describe UserActionsController do
 
       describe 'the resulting UserAction' do
         subject { assigns(:user_action) }
-        it { should be_a_new UserAction }
+        it 'is a new UserAction' do
+          expect(subject).to be_a_new UserAction
+        end
       end
 
       describe 'the response' do
         subject { response }
-        it { should render_template "new" }
+        it 'renders the "new" template' do
+          expect(subject).to render_template "new"
+        end
       end
     end
   end

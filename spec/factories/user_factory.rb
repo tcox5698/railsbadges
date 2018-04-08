@@ -5,7 +5,7 @@ FactoryBot.define do
     password 'factory!'
     password_confirmation 'factory!'
 
-    ignore do
+    transient do
       user_roles  ['user']
     end
 
@@ -20,13 +20,13 @@ FactoryBot.define do
     end
 
     factory :superuser do
-      ignore do
+      transient do
         user_roles  ['superuser']
       end
     end
 
     factory :administrator do
-      ignore do
+      transient do
         user_roles  ['administrator']
       end
     end
