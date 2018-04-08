@@ -196,7 +196,7 @@ describe UserActionsController do
       describe "with invalid params" do
         let(:user_action) { create :user_action }
         before do
-          UserAction.any_instance.stub(:save).and_return(false)
+          allow(UserAction.any_instance).to receive(:save).and_return(false)
           put :update, params: {:id => user_action.to_param, :user_action => {'wonky' => 'parrot'}}
         end
 
@@ -230,5 +230,4 @@ describe UserActionsController do
       response.should redirect_to(user_actions_url)
     end
   end
-
 end
