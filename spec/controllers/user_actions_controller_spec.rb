@@ -99,7 +99,7 @@ describe UserActionsController do
     end
     it "assigns a new user_action as @user_action" do
       get :new, {}
-      assigns(:user_action).should be_a_new(UserAction)
+      expect(assigns(:user_action)).to be_a_new(UserAction)
     end
   end
 
@@ -176,7 +176,7 @@ describe UserActionsController do
 
       describe "with valid params" do
         before do
-          UserAction.any_instance.should_receive(:update).with({'name' => 'bob'}).and_call_original
+          expect(user_action.name).to eq 'factory_action'
           put :update, {:id => user_action.to_param, :user_action => {'name' => 'bob'}}
         end
 
@@ -184,6 +184,7 @@ describe UserActionsController do
           subject { assigns :user_action }
           it { should eq user_action }
           its(:errors) { should be_empty }
+          its(:name) {should eq 'bob'}
         end
 
         describe 'the response' do
