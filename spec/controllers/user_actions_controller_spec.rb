@@ -146,7 +146,7 @@ describe UserActionsController do
     describe "with invalid params" do
       before do
         # Trigger the behavior that occurs when invalid params are submitted
-        UserAction.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(UserAction).to receive(:save).and_return(false)
         post :create, params: {:user_action => {'wonk' => 'space'}}
       end
 
@@ -196,7 +196,7 @@ describe UserActionsController do
       describe "with invalid params" do
         let(:user_action) { create :user_action }
         before do
-          allow(UserAction.any_instance).to receive(:save).and_return(false)
+          allow_any_instance_of(UserAction).to receive(:save).and_return(false)
           put :update, params: {:id => user_action.to_param, :user_action => {'wonky' => 'parrot'}}
         end
 
