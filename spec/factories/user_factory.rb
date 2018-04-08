@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, class: User do
     email 'user@email.com'
     confirmed_at Time.now
