@@ -1,34 +1,34 @@
 source 'https://rubygems.org'
 
-ruby '2.1.10'
+ruby '2.2.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '~>5.0.7'
 
-gem 'pg', '0.21.0'
+gem 'pg'
 gem 'devise'
 gem 'cancan'
+#
+# # Use SCSS for stylesheets
+gem 'sass-rails'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.5'
+# # Use Uglifier as compressor for JavaScript assets
+gem 'uglifier'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# # Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-# Use jquery as the JavaScript library
+# # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+# # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder'
 
 gem 'annotate'
 
@@ -44,7 +44,7 @@ group :development do
 end
 
 group :test do
-  gem 'minitest'
+#   gem 'minitest'
   gem 'capybara-email'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
@@ -52,6 +52,7 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', "< 3.0.0", :require => false
   gem 'rspec-activemodel-mocks'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
@@ -62,6 +63,7 @@ group :development, :test do
   gem 'factory_bot_rails'
 end
 
+## these were never enabled
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
