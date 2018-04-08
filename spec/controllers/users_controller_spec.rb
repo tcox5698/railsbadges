@@ -39,7 +39,11 @@ describe UsersController do
       describe 'when I update a user successfully' do
         before do
           sign_in current_user
-          put :update, id: edit_user.id, user: {email: edit_user.email, disabled: '1'}, selected_roles: [Role.find_by_name('administrator').id]
+          put :update, params: {
+            id: edit_user.id,
+            user: {email: edit_user.email, disabled: '1'},
+            selected_roles: [Role.find_by_name('administrator').id]
+          }
         end
 
         its(:current_user) { should be_nil }
@@ -70,7 +74,7 @@ describe UsersController do
     before do
       sign_in current_user
 
-      get :edit, id: input_user_id
+      get :edit, params: {id: input_user_id  }
     end
 
     context 'when user does not have ability to edit users' do
