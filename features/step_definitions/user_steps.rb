@@ -28,15 +28,20 @@ def get_last_email
 end
 
 Then(/^I receive an email confirmation at '(.*)'$/) do |email_address|
-  confirmation = get_last_email()
-
-  confirmation.should have_content 'You can confirm your account email through the link below'
+  # confirmation = get_last_email()
+  #
+  # expect(confirmation).to have_content 'You can confirm your account email through the link below'
+  #
+  open_email('buckaroo@here.com')
+  expect(current_email.body).to match 'You can confirm'
 end
 
 When(/^I follow the link in the email confirmation sent to '(.*)'$/) do |email_address|
-  confirmation = get_last_email()
+  require 'capybara/email/rspec'
+  open_email(email_address)
 
-  confirmation.click_link 'Confirm my account'
+  xmail = current_email
+  xmail.click_link 'Confirm my account'
 
   page.should have_content 'Your account was successfully confirmed.'
   page.should have_content 'Sign in'
@@ -46,7 +51,10 @@ def login(username, password)
   fill_in 'Email', :with => username
   fill_in 'Password', :with => password
 
-  page.click_button 'Sign in'
+  button = find_button('Sign in')
+
+  button.click()
+  
 end
 
 Then(/^I can login with email '(.*)' and password '(.*)'$/) do |email, password|
