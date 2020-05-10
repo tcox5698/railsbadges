@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.10'
+ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~>5.1.6'
@@ -47,7 +47,6 @@ group :test do
 #   gem 'minitest'
   gem 'capybara-email'
   gem 'selenium-webdriver'
-  gem 'capybara-webkit'
   gem 'capybara'#, "< 3.0.0"
   gem 'database_cleaner'
   gem 'shoulda-matchers', "< 3.0.0", :require => false
