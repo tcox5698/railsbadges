@@ -9,7 +9,7 @@ Rails project for keeping up to date - tracks achievements!
 1. install bundler `gem install bundler`
 1. install v8 `brew install v8`
 1. `bundle install`
-1. start postgres `postgres -D /Users/<your_user>/dev/postgres_data`
+1. start postgres `./script/bootstrap_db.sh`
 1. `rake db:create`
 1. `rake db:migrate`
 1. `rake db:migrate RAILS_ENV=test`
