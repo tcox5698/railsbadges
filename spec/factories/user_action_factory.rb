@@ -11,7 +11,7 @@ end
 # Table name: user_actions
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
+#  name        :string
 #  action_date :datetime
 #  user_id     :integer
 #  created_at  :datetime
